@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <title>Leitor de Tela</title>
+    <meta charset="UTF-8">
+    <meta name="fragment" content="!">
+    <meta name="viewport" content="width=device-width">
+    <link rel="stylesheet" href="./browser/bootstrap.min.css">
+    <style>
+        body {
+            text-align: center;
+        }
+
+        .jumbotron {
+            margin-bottom: 0;
+            padding-right: 15px;
+            padding-left: 15px;
+        }
+
+        #free {
+            position: absolute;
+            top: 15px;
+            left: -25px;
+            padding: 2px 25px;
+            background: pink;
+            transform: rotate(-45deg);
+            display: block;
+            line-height: initial;
+            font-size: 16px;
+            text-shadow: 2px 2px 3px rgba(0, 0, 0, 0.3);
+            box-shadow: 0 1px 5px 1px rgba(0, 0, 0, 0.3);
+        }
+
+        .form-control {
+            max-width: 300px;
+            margin: auto;
+        }
+
+        .form-control[type=checkbox] {
+            display: inline-block;
+            width: auto;
+        }
+
+        .form-control[type=checkbox]:not(:focus) {
+            box-shadow: none;
+        }
+
+        #reveal-checked:not(:checked)~* {
+            display: none;
+        }
+    </style>
+</head>
+
+<body>
+    <main class="jumbotron">
+        <h1>Leitor de Tela</h1>
+        <h3>Inclusão digital para pessoas com deficiência visual através de UX</h3>
+        <sup id="free">Versão 1.0</sup>
+
+        <br>
+        <hr>
+        <br>
+
+        <div>
+            <h2>Olá, meu nome é Vinícius</h2>
+            <h2><a href="www.google.com.br" target="_blank">Click aqui para ir pro google.</a></h2>
+
+            <h2><input class="form-control" placeholder="Digite algo aqui dentro" autofocus></h2>
+            <h2><input class="form-control" type="email" value="Já estou preenchido"></h2>
+
+            <h3>
+                <select class="form-control">
+                    <option value="">Selecione algo</option>
+                    <option value="1">Sua primeira opção</option>
+                    <option value="2">Sua segunda opção</option>
+                </select>
+            </h3>
+
+        </div>
+
+        <br>
+        <hr>
+        <br>
+
+        <div>
+            <h3>
+                <button id="raise" class="btn btn-info">Ele lhe avisará quando mudar</button>
+                <h4 id="numb">Olá, eu fiz uma alteração</h4>
+                <script>
+                    let raise = document.getElementById("raise");
+                    let numb;
+                    raise.onclick = () => {
+                        numb = numb || document.getElementById("numb");
+                        let oldText = numb.innerText;
+                        numb.innerText = oldText.slice(0, oldText.length - 1) + (+oldText.slice(oldText.length - 1) + 1);
+                    };
+                </script>
+            </h3>
+
+            <h3>
+                <input id="toggle" type="button" value="Você saberá quando um novo conteúdo aparecer"
+                    class="btn btn-success">
+                <script id="self-script">
+                    let toggle = document.getElementById("toggle");
+                    let selfScript;
+                    toggle.onclick = () => {
+                        let newElement = document.createElement("h5");
+                        newElement.innerText = "Olá, sou um novo";
+                        selfScript = selfScript || document.getElementById("self-script");
+                        toggle.parentElement.insertBefore(newElement, selfScript);
+                        setTimeout(() => newElement.remove(), 2000);
+                    };
+                </script>
+            </h3>
+        </div>
+
+        <br>
+        <hr>
+        <br>
+
+
+
+    </main>
+
+    <script src="./browser/system.js"></script>
+    <script src="./bundle.js"></script>
+    <script>System.load("Main");</script>
+</body>
+
+</html>
